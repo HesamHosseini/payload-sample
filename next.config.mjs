@@ -11,6 +11,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
 }
 
 export default withPayload(nextConfig)
