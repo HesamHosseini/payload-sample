@@ -2,8 +2,6 @@
 // In a real implementation, these would be actual API calls
 
 import type { CartItem } from "@/components/cart-provider";
-import config from "@/payload.config";
-import { getPayload } from "payload";
 
 // Types
 export type Product = {
@@ -651,10 +649,6 @@ export async function fetchBrands(): Promise<Brand[]> {
 }
 
 export async function fetchBanners(position?: string): Promise<Banner[]> {
-    const bannersFromPayload = await getPayloadClient();
-
-    console.log("bannersFromPayload", bannersFromPayload);
-
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     let banners = generateMockBanners();
@@ -747,23 +741,4 @@ export async function createOrder(orderData: { items: CartItem[]; shippingAddres
     mockCartItems = [];
 
     return newOrder;
-}
-
-async function getPayloadClient() {
-    const payload = await getPayload({ config });
-
-    // const foundBanners = await payload.find({
-    //     collection: "banners",
-    //     where: {
-    //         position: {
-    //             equals: "hero",
-    //         },
-    //     },
-    // });
-
-    // console.log(foundBanners);
-
-    // return foundBanners;
-
-    return [];
 }

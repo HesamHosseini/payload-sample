@@ -43,5 +43,5 @@ export default buildConfig({
             fileSize: 5000000, // 5MB
         },
     },
-    secret: "secret",
+    secret: process.env.PAYLOAD_SECRET || "",
 });

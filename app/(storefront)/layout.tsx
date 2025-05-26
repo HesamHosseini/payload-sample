@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import type React from "react";
 import "./globals.css";
+import Navbar from "@/components/navbar";
 
 const vazirmatn = Vazirmatn({
     subsets: ["arabic"],
@@ -27,9 +28,9 @@ export default function RootLayout({
             <body className={`${vazirmatn.variable} font-sans min-h-screen flex flex-col`}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                     <CartProvider>
-                        {/* <Navbar /> */}
+                        <Navbar />
                         <main className="flex-grow">{children}</main>
-                        {/* <Footer /> */}
+                        <Footer />
                     </CartProvider>
                 </ThemeProvider>
             </body>
