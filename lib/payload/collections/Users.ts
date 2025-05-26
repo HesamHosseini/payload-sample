@@ -3,6 +3,10 @@ import { isAdmin, isAdminOrSelf } from "../access/isAdmin";
 
 const Users: CollectionConfig = {
     slug: "users",
+    labels: {
+        singular: "کاربر",
+        plural: "کاربران",
+    },
     auth: true,
     admin: {
         useAsTitle: "email",
@@ -14,6 +18,7 @@ const Users: CollectionConfig = {
         update: isAdminOrSelf,
         delete: isAdmin,
     },
+
     fields: [
         {
             name: "firstName",
@@ -48,9 +53,6 @@ const Users: CollectionConfig = {
             ],
             defaultValue: "user",
             required: true,
-            access: {
-                update: isAdmin,
-            },
         },
         {
             name: "addresses",

@@ -1,6 +1,5 @@
 import type { CollectionConfig, CollectionSlug } from "payload";
 import { isAdmin } from "../access/isAdmin";
-import { isAdminOrPublished } from "../access/isAdminOrPublished";
 
 const Banners: CollectionConfig = {
     slug: "banners",
@@ -10,7 +9,7 @@ const Banners: CollectionConfig = {
         group: "محتوا",
     },
     access: {
-        read: isAdminOrPublished,
+        read: () => true,
         create: isAdmin,
         update: isAdmin,
         delete: isAdmin,

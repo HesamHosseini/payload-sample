@@ -1,9 +1,4 @@
-import BrandsShowcase from "@/components/home/brands-showcase";
-import CategoryShowcase from "@/components/home/category-showcase";
-import FeaturedProducts from "@/components/home/featured-products";
 import HeroSection from "@/components/home/hero-section";
-import PromotionalBanners from "@/components/home/promotional-banners";
-import Testimonials from "@/components/home/testimonials";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 
@@ -14,7 +9,7 @@ export default function Home() {
                 <HeroSection />
             </Suspense>
 
-            <div className="container mx-auto px-4 py-16 space-y-24">
+            {/* <div className="container mx-auto px-4 py-16 space-y-24">
                 <Suspense fallback={<CategoryShowcaseSkeleton />}>
                     <CategoryShowcase />
                 </Suspense>
@@ -34,7 +29,7 @@ export default function Home() {
                 <Suspense fallback={<BrandsShowcaseSkeleton />}>
                     <BrandsShowcase />
                 </Suspense>
-            </div>
+            </div> */}
         </div>
     );
 }
