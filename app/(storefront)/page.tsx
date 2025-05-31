@@ -1,15 +1,24 @@
+import BrandsShowcase from "@/components/home/brands-showcase";
+import CategoryShowcase from "@/components/home/category-showcase";
+import FeaturedProducts from "@/components/home/featured-products";
 import HeroSection from "@/components/home/hero-section";
+import PromotionalBanners from "@/components/home/promotional-banners";
+import Testimonials from "@/components/home/testimonials";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getLoggedInUser } from "@/lib/auth";
 import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
+    
+    const user = await getLoggedInUser();
+    console.log(user);
     return (
         <div className="animate-fade-in">
             <Suspense fallback={<div className="h-[500px] w-full bg-muted animate-pulse"></div>}>
                 <HeroSection />
             </Suspense>
 
-            {/* <div className="container mx-auto px-4 py-16 space-y-24">
+            <div className="container mx-auto px-4 py-16 space-y-24">
                 <Suspense fallback={<CategoryShowcaseSkeleton />}>
                     <CategoryShowcase />
                 </Suspense>
@@ -29,7 +38,7 @@ export default function Home() {
                 <Suspense fallback={<BrandsShowcaseSkeleton />}>
                     <BrandsShowcase />
                 </Suspense>
-            </div> */}
+            </div>
         </div>
     );
 }
