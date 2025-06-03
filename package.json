@@ -10,7 +10,7 @@
         "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
         "lint": "next lint",
         "seed": "NODE_ENV=development pnpm exec tsx ./seed.ts",
-        "generate-fetchers": "NODE_ENV=development ts-node --loader ts-node/esm scripts/generate-fetchers.ts"
+        "generate-fetchers": "NODE_ENV=development tsx scripts/generate-fetchers.ts"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.0.1",

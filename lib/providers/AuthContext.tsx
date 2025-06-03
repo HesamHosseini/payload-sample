@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const fetchUser = async () => {
             setLoading(true);
             try {
-                debugger;
                 const fetchedUser = await fetch("/api/auth/me");
                 if (!fetchedUser.ok) {
                     throw new Error("Failed to fetch user");

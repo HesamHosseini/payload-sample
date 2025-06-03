@@ -10,7 +10,6 @@ import { Suspense } from "react";
 
 export default async function Home() {
     const user = await getLoggedInUser();
-    console.log(user);
     return (
         <div className="animate-fade-in">
             <Suspense fallback={<div className="h-[500px] w-full bg-muted animate-pulse"></div>}>

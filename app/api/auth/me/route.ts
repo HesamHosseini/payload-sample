@@ -5,7 +5,6 @@ export async function GET(request: Request) {
     try {
         const user = await getLoggedInUser();
 
-        console.log("user", user);
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }

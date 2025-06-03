@@ -4,7 +4,6 @@ import type { User } from "payload";
 import { getPayload } from "payload";
 
 export async function getLoggedInUser(): Promise<{ user: User; token: string } | null> {
-    debugger;
     const headersList = await headers();
     const cookieStore = await cookies();
 

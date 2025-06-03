@@ -13,38 +13,55 @@ const baseFetcher = (slug: string, requireAuth = true) => {
 
     const authHeaders = requireAuth
         ? `headers: {
-      "Authorization": \`Bearer \${token}\`,
-    },`
+    "Authorization": \`Bearer \${token}\`,
+  },`
         : ``;
 
     return `import { ${entityName} } from "@/payload-types";
 
+
 const API_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || "http://localhost:3000";
 
-export async function get${capitalize(slug)}(token${requireAuth ? "" : "?"}: string): Promise<${entityName}[]> {
-  const res = await fetch(\`\${API_URL}/api/${slug}\`, {
-    ${authHeaders}
-  });
-  return res.json();
+type PaginatedResponse<T> = {
+  docs: T[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: number | null;
+  page: number;
+  pagingCounter: number;
+  prevPage: number | null;
+  totalDocs: number;
+  totalPages: number;
+};
+
+export async function get${capitalize(slug)}(token${requireAuth ? "" : "?"}: string): Promise<PaginatedResponse<${entityName}>> {
+const res = await fetch(\`\${API_URL}/api/${slug}\`, {
+  ${authHeaders}
+});
+if (!res.ok) throw new Error("Failed to fetch ${slug}");
+return res.json();
 }
 
 export async function get${entityName}(id: string, token${requireAuth ? "" : "?"}: string): Promise<${entityName}> {
-  const res = await fetch(\`\${API_URL}/api/${slug}/\${id}\`, {
-    ${authHeaders}
-  });
-  return res.json();
+const res = await fetch(\`\${API_URL}/api/${slug}/\${id}\`, {
+  ${authHeaders}
+});
+if (!res.ok) throw new Error("Failed to fetch ${entityName} with id " + id);
+return res.json();
 }
 
 export async function create${entityName}(data: Partial<${entityName}>, token: string): Promise<${entityName}> {
-  const res = await fetch(\`\${API_URL}/api/${slug}\`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": \`Bearer \${token}\`,
-    },
-    body: JSON.stringify(data),
-  });
-  return res.json();
+const res = await fetch(\`\${API_URL}/api/${slug}\`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": \`Bearer \${token}\`,
+  },
+  body: JSON.stringify(data),
+});
+if (!res.ok) throw new Error("Failed to create ${entityName}");
+return res.json();
 }
 `;
 };

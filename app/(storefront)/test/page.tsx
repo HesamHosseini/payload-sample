@@ -1,20 +1,9 @@
 "use client";
 
-import { useAuthContext } from "@/hooks/auth/useAuthContext";
-import type { User } from "@/payload-types";
-import { useState } from "react";
+import { UseUsers } from "./useUsers";
 
 export default function TestUsersPage() {
-    const [users, setUsers] = useState<Array<User>>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const { user, loading, token } = useAuthContext();
-
-    console.log({ user, loading, token });
-
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    // }, [user]);
+    const { users, isLoading, error } = UseUsers();
 
     return (
         <div className="max-w-xl mx-auto mt-10 space-y-6">
