@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
     const cookieStore = await cookies();
     const token = cookieStore.get("payload-token")?.value;
+    if (!token) {
+        return NextResponse.json({ error: "No token found" }, { status: 401 });
+    }
 
     return NextResponse.json({ token });
 }

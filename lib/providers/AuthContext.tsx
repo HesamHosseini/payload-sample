@@ -1,35 +1,49 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import type { User } from "payload";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
-type AuthContextType = {
-    token: string | null;
-    setToken: (token: string | null) => void;
-};
+export interface AuthContextType {
+    user: User | null;
+    token?: string | null;
+    loading: boolean;
+}
 
-const AuthContext = createContext<AuthContextType>({
-    token: null,
-    setToken: () => {},
-});
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [token, setTokenState] = useState<string | null>(null);
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!token) {
-            fetch("/api/auth/token")
-                .then((res) => res.json())
-                .then((data) => {
-                    debugger;
-                    if (data.token) {
-                        setTokenState(data.token);
-                    }
-                })
-                .catch(() => {});
+        const fetchUser = async () => {
+            setLoading(true);
+            try {
+                debugger;
+                const fetchedUser = await fetch("/api/auth/me");
+                if (!fetchedUser.ok) {
+                    throw new Error("Failed to fetch user");
+                }
+                const fetchedUserData = (await fetchedUser.json()) as { user: User | null; token: string | null };
+
+                if (!fetchedUserData) {
+                    throw new Error("User not found");
+                }
+                setUser(fetchedUserData.user);
+                setToken(fetchedUserData.token);
+            } catch (error) {
+                console.error("Error fetching user:", error);
+                setUser(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (!user) {
+            fetchUser();
         }
-    }, []);
+    }, [user]);
 
-    return <AuthContext.Provider value={{ token, setToken: setTokenState }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ user: user, loading, token }}>{children}</AuthContext.Provider>;
 };
-
-export const useAuth = () => useContext(AuthContext);

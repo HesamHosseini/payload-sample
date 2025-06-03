@@ -4,6 +4,8 @@ import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 // import { UserProvider } from "@/lib/auth";
 // import { getSession, getUser } from "@/lib/auth/session";
+
+import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/providers/AuthContext";
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
@@ -39,6 +41,7 @@ export default function RootLayout({
                         </CartProvider>
                         {/* </UserProvider> */}
                     </AuthProvider>
+                    <Toaster richColors />
                 </ThemeProvider>
             </body>
         </html>

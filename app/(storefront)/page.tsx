@@ -9,7 +9,6 @@ import { getLoggedInUser } from "@/lib/auth";
 import { Suspense } from "react";
 
 export default async function Home() {
-    
     const user = await getLoggedInUser();
     console.log(user);
     return (

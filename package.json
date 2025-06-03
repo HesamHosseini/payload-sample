@@ -13,7 +13,7 @@
         "generate-fetchers": "NODE_ENV=development ts-node --loader ts-node/esm scripts/generate-fetchers.ts"
     },
     "dependencies": {
-        "@hookform/resolvers": "latest",
+        "@hookform/resolvers": "^5.0.1",
         "@payloadcms/db-sqlite": "^3.39.1",
         "@payloadcms/next": "^3.39.1",
         "@payloadcms/richtext-lexical": "^3.39.1",
@@ -60,22 +60,22 @@
         "jwt-decode": "^4.0.0",
         "lucide-react": "^0.454.0",
         "next": "15.2.4",
-        "next-themes": "latest",
+        "next-themes": "^0.4.6",
         "node-fetch": "^3.3.2",
         "payload": "^3.39.1",
         "react": "^19",
         "react-day-picker": "8.10.1",
         "react-dom": "^19",
-        "react-hook-form": "latest",
+        "react-hook-form": "^7.56.4",
         "react-resizable-panels": "^2.1.7",
         "recharts": "2.15.0",
         "sharp": "^0.34.2",
-        "sonner": "^1.7.1",
+        "sonner": "^1.7.4",
         "swr": "^2.3.3",
         "tailwind-merge": "^2.5.5",
         "tailwindcss-animate": "^1.0.7",
         "vaul": "^0.9.6",
-        "zod": "latest"
+        "zod": "^3.25.30"
     },
     "devDependencies": {
         "@types/node": "^22.15.21",
